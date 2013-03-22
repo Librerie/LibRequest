@@ -10,13 +10,29 @@
 #import "Request.h"
 
 @implementation RequestDelegate
+@synthesize eventCode;
+@synthesize eventDetails;
 
+- (id)init {
+    
+    self = [super init];
+    self.eventDetails = @"Detail";
+    self.eventCode = @"91";
+    
+    return self;
+}
 
+- (id)initWithEventCode:(NSString *)aEventCode andEventDetails:(NSString *)aEventDetails {
+    
+    self = [super init];
+    self.eventDetails = aEventDetails;
+    self.eventCode = aEventCode;
+    
+    return self;
+}
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    
-    int k = 0;
-    
+        
     NSHTTPURLResponse *urlRestponse = [[NSHTTPURLResponse alloc] init];
     urlRestponse = (NSHTTPURLResponse *)response;
     
@@ -26,16 +42,7 @@
     if ([str isEqualToString:@"true"]) {
         
         NSLog(@"_-_ Record Creato");
-        
-        //[Request requestEventWithDomain:nil withAction:nil withUniqueId:@"898" withEventCode:@"2" withEventDetails:@"Aggiunto peso"];
-        //[Request sendEvent:nil];
-        //NSString *idDeviceStr = [NSString alloc];
-        //idDeviceStr = [idDeviceStr initWithString:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
-    
-        
-        
-        //idDeviceStr = [idDeviceStr stringByAppendingString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]];
-        [Request requestEventWithDomain:nil withAction:nil withUniqueId:[Request uniqueId] withEventCode:@"91" withEventDetails:@"PressButtonSOS"];
+        [Request requestEventWithDomain:nil withAction:nil withUniqueId:[Request uniqueId] withEventCode:self.eventCode withEventDetails:self.eventDetails];
     }
     else {
         NSLog(@"*** Errore: Record non creato");

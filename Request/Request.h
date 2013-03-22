@@ -36,6 +36,9 @@
 
 + (NSString *)uniqueId;
 
++ (void)requestWithDomain:(NSString *)domain withEventCode:(NSString *)aEventCode andEventDetails:(NSString *)aEventDetails;
+
+
 + (void)requestWithDomain:(NSString *)domain;
 /**
  @method

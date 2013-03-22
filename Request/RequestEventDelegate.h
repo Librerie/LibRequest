@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RequestEventDelegate : NSObject <NSURLConnectionDelegate, NSURLConnectionDataDelegate, NSURLConnectionDownloadDelegate, NSURLProtocolClient>
+@interface RequestEventDelegate : NSObject <NSURLConnectionDataDelegate>
 
 @end

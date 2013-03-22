@@ -48,6 +48,55 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
     return myInstance;
 }
 
+
++ (void)requestWithDomain:(NSString *)domain withEventCode:(NSString *)aEventCode andEventDetails:(NSString *)aEventDetails {
+    
+    if (!domain) {
+        domain = DOMAIN_SITO;
+    }
+
+    
+    //Nome app
+    NSString *nameApp = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+    
+    //-- Impostazioni Request
+    NSURL *url = [NSURL URLWithString:domain];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    
+    
+    //-- INFO DEVICE
+    NSString *deviceInfo = [[NSString alloc] init];
+    deviceInfo = [deviceInfo stringByAppendingFormat:@"Name: %@", [[UIDevice currentDevice] name]];
+    deviceInfo = [deviceInfo stringByAppendingFormat:@" - Model: %@", [[UIDevice currentDevice] model]];
+    deviceInfo = [deviceInfo stringByAppendingFormat:@" -  SysName: %@", [[UIDevice currentDevice] systemName]];
+    deviceInfo = [deviceInfo stringByAppendingFormat:@" - SysVer: %@", [[UIDevice currentDevice] systemVersion]];
+    
+    
+    //-- Riempio la request con le informazioni
+    [request setValue:@"ensureactivationrecord" forHTTPHeaderField:ACTION];
+    [request setValue:[Request uniqueId] forHTTPHeaderField:UNIQUE_ID];
+    [request setValue:@"9" forHTTPHeaderField:PRODUCER_ID];
+    [request setValue:nameApp forHTTPHeaderField:APP_NAME];
+    
+    [request setValue:@"true" forHTTPHeaderField:TRACK_ONLY];
+    [request setValue:deviceInfo forHTTPHeaderField:DEVICE_INFO];
+    
+    // -- Invio Request
+    RequestDelegate *delegate = [[RequestDelegate alloc] initWithEventCode:aEventCode andEventDetails:aEventDetails];
+    NSURLConnection *urlConnetction = [[NSURLConnection alloc] initWithRequest:request delegate:delegate];
+    
+    
+    if (urlConnetction) {
+        NSLog(@"-_- Request Sent - %@", request);
+    }
+    else {
+        NSLog(@"****ERROR: urlConnection is NIL");
+        
+    }
+}
+
+
 /**
  TODO: Creazione nuovo record.
  */
@@ -56,11 +105,6 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
     if (domain == nil) {
         domain = DOMAIN_SITO;
     }
-    
-    NSURLRequest *requestURL = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:DOMAIN_SITO]
-                                                     cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                 timeoutInterval:60.0];
-    
     
     NSURL *url = [NSURL URLWithString:domain];
     

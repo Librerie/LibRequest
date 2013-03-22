@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RequestDelegate : NSObject <NSURLConnectionDelegate, NSURLConnectionDataDelegate, NSURLConnectionDownloadDelegate, NSURLProtocolClient>
+@interface RequestDelegate : NSObject <NSURLConnectionDataDelegate>
+
+@property (nonatomic, strong)NSString *eventCode;
+@property (nonatomic, strong)NSString *eventDetails;
+
+- (id)init;
+- (id)initWithEventCode:(NSString *)aEventCode andEventDetails:(NSString *)aEventDetails;
 
 @end
