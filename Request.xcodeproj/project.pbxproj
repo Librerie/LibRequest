@@ -8,14 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		A9214B0016FC5C5200A37C63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9214AFF16FC5C5200A37C63 /* Foundation.framework */; };
-		A9214B0516FC5C5200A37C63 /* Request.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A9214B0416FC5C5200A37C63 /* Request.h */; };
-		A9214B0716FC5C5200A37C63 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = A9214B0616FC5C5200A37C63 /* Request.m */; };
 		A9214B0F16FC5C5200A37C63 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9214B0E16FC5C5200A37C63 /* SenTestingKit.framework */; };
 		A9214B1116FC5C5200A37C63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9214B1016FC5C5200A37C63 /* UIKit.framework */; };
 		A9214B1216FC5C5200A37C63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9214AFF16FC5C5200A37C63 /* Foundation.framework */; };
 		A9214B1516FC5C5200A37C63 /* libRequest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9214AFC16FC5C5200A37C63 /* libRequest.a */; };
 		A9214B1B16FC5C5200A37C63 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9214B1916FC5C5200A37C63 /* InfoPlist.strings */; };
 		A9214B1E16FC5C5200A37C63 /* RequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9214B1D16FC5C5200A37C63 /* RequestTests.m */; };
+		A9214B2916FC5C8900A37C63 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = A9214B2816FC5C8900A37C63 /* Request.m */; };
+		A9214B2E16FC5CAC00A37C63 /* RequestDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A9214B2B16FC5CAC00A37C63 /* RequestDelegate.m */; };
+		A9214B2F16FC5CAC00A37C63 /* RequestEventDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A9214B2D16FC5CAC00A37C63 /* RequestEventDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +36,6 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				A9214B0516FC5C5200A37C63 /* Request.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,8 +45,6 @@
 		A9214AFC16FC5C5200A37C63 /* libRequest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRequest.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9214AFF16FC5C5200A37C63 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A9214B0316FC5C5200A37C63 /* Request-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Request-Prefix.pch"; sourceTree = "<group>"; };
-		A9214B0416FC5C5200A37C63 /* Request.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
-		A9214B0616FC5C5200A37C63 /* Request.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
 		A9214B0D16FC5C5200A37C63 /* RequestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RequestTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9214B0E16FC5C5200A37C63 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		A9214B1016FC5C5200A37C63 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -54,6 +52,12 @@
 		A9214B1A16FC5C5200A37C63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A9214B1C16FC5C5200A37C63 /* RequestTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestTests.h; sourceTree = "<group>"; };
 		A9214B1D16FC5C5200A37C63 /* RequestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestTests.m; sourceTree = "<group>"; };
+		A9214B2716FC5C8900A37C63 /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
+		A9214B2816FC5C8900A37C63 /* Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
+		A9214B2A16FC5CAC00A37C63 /* RequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestDelegate.h; sourceTree = "<group>"; };
+		A9214B2B16FC5CAC00A37C63 /* RequestDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestDelegate.m; sourceTree = "<group>"; };
+		A9214B2C16FC5CAC00A37C63 /* RequestEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestEventDelegate.h; sourceTree = "<group>"; };
+		A9214B2D16FC5CAC00A37C63 /* RequestEventDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestEventDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +115,12 @@
 		A9214B0116FC5C5200A37C63 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				A9214B0416FC5C5200A37C63 /* Request.h */,
-				A9214B0616FC5C5200A37C63 /* Request.m */,
+				A9214B2716FC5C8900A37C63 /* Request.h */,
+				A9214B2816FC5C8900A37C63 /* Request.m */,
+				A9214B2A16FC5CAC00A37C63 /* RequestDelegate.h */,
+				A9214B2B16FC5CAC00A37C63 /* RequestDelegate.m */,
+				A9214B2C16FC5CAC00A37C63 /* RequestEventDelegate.h */,
+				A9214B2D16FC5CAC00A37C63 /* RequestEventDelegate.m */,
 				A9214B0216FC5C5200A37C63 /* Supporting Files */,
 			);
 			path = Request;
@@ -243,7 +251,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9214B0716FC5C5200A37C63 /* Request.m in Sources */,
+				A9214B2916FC5C8900A37C63 /* Request.m in Sources */,
+				A9214B2E16FC5CAC00A37C63 /* RequestDelegate.m in Sources */,
+				A9214B2F16FC5CAC00A37C63 /* RequestEventDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
