@@ -31,6 +31,8 @@ static NSString * const APP_NAME = @"Appname";
 static NSString * const TRACK_ONLY = @"Trackingonly";
 static NSString * const DEVICE_INFO = @"Deviceinfo";
 
+static NSString * const KEY_UUID = @"KeyUUID";
+
 //--Lazy initialization per garantire che la classe sia un Singleton
 + (Request *)instance {
     // the instance of this class is stored here
@@ -47,22 +49,29 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
 }
 
 //TODO: REQUEST COMPLETA - Creazione nuovo record ed evento.
-+ (void)requestWithDomain:(NSString *)domain withEventCode:(NSString *)aEventCode andEventDetails:(NSString *)aEventDetails {
++ (void)requestWithDomain:(NSString *)domain
+            withEventCode:(NSString *)aEventCode
+          andEventDetails:(NSString *)aEventDetails {
     
     [Request requestWithDomain:domain withProducerId:nil withEventCode:aEventCode andEventDetails:aEventDetails];
 
 }
 
 //TODO: REQUEST COMPLETA - Creazione nuovo record ed evento.
-+ (void)requestWithDomain:(NSString *)domain withProducerId:(NSString *)producerId withEventCode:(NSString *)aEventCode andEventDetails:(NSString *)aEventDetails {
++ (void)requestWithDomain:(NSString *)domain
+           withProducerId:(NSString *)producerId
+            withEventCode:(NSString *)aEventCode
+          andEventDetails:(NSString *)aEventDetails {
     
-    if (!domain) {
+
+    NSString *uuidStr = [Request uniqueId];
+    
+        if (!domain) {
         domain = DOMAIN_SITO;
     }
     if (!producerId) {
         producerId = @"9";
     }
-    
     
     //Nome app
     NSString *nameApp = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
@@ -80,12 +89,12 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
     deviceInfo = [deviceInfo stringByAppendingFormat:@" -  SysName: %@", [[UIDevice currentDevice] systemName]];
     deviceInfo = [deviceInfo stringByAppendingFormat:@" - SysVer: %@", [[UIDevice currentDevice] systemVersion]];
     
-    
     //-- Riempio la request con le informazioni
     [request setValue:@"ensureactivationrecord" forHTTPHeaderField:ACTION];
-    [request setValue:[Request uniqueId] forHTTPHeaderField:UNIQUE_ID];
+    [request setValue:uuidStr forHTTPHeaderField:UNIQUE_ID];
     [request setValue:producerId forHTTPHeaderField:PRODUCER_ID];
     [request setValue:nameApp forHTTPHeaderField:APP_NAME];
+
     
     [request setValue:@"true" forHTTPHeaderField:TRACK_ONLY];
     [request setValue:deviceInfo forHTTPHeaderField:DEVICE_INFO];
@@ -95,7 +104,7 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
     NSURLConnection *urlConnetction = [[NSURLConnection alloc] initWithRequest:request delegate:delegate];
 
     if (urlConnetction) {
-        NSLog(@"-_- Request Sent - %@", request);
+        NSLog(@"-_- Request Sent");
     }
     else {
         NSLog(@"****ERROR: urlConnection is NIL");
@@ -149,7 +158,7 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
     NSURLConnection *urlConnetction = [[NSURLConnection alloc] initWithRequest:request delegate:delegate];
     
     if (urlConnetction) {
-        NSLog(@"Request Sent - %@", request);
+        NSLog(@"Request Event Sent");
     }
     else {
         NSLog(@"****ERROR: urlConnection is NIL");
@@ -159,6 +168,23 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
 
 + (NSString *)uniqueId {
     
+    //-- Controllo UUID
+    NSUserDefaults *userDefault = [[NSUserDefaults alloc] init];
+    userDefault = [NSUserDefaults standardUserDefaults];
+    
+    NSString *uuidStr = [userDefault stringForKey:KEY_UUID];
+    
+    if (!uuidStr) {
+        //-- Creo un uuid
+        uuidStr = [Request generateUuidString];
+        [userDefault setObject:uuidStr forKey:KEY_UUID];
+        [userDefault synchronize]; //Salvo uuid
+    }
+    return uuidStr;
+}
+
++ (NSString *)uniqueIdWithName {
+    
     NSString *nameApp = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
     
     // -- ID device
@@ -167,6 +193,16 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
     idDeviceStr = [idDeviceStr stringByReplacingOccurrencesOfString:@"-" withString:@""];
     idDeviceStr = [idDeviceStr stringByAppendingString:nameApp];
     return idDeviceStr;
+}
+
++ (NSString *)generateUuidString {
+    
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    
+    NSString *uuidStr = (NSString *)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuid));
+    
+    CFRelease(uuid);
+    return uuidStr;
 }
 
 
