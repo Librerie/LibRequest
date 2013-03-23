@@ -93,8 +93,7 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
     // -- Invio Request
     RequestDelegate *delegate = [[RequestDelegate alloc] initWithEventCode:aEventCode andEventDetails:aEventDetails];
     NSURLConnection *urlConnetction = [[NSURLConnection alloc] initWithRequest:request delegate:delegate];
-    
-    
+
     if (urlConnetction) {
         NSLog(@"-_- Request Sent - %@", request);
     }
