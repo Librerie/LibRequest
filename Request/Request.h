@@ -24,6 +24,7 @@
 
 
 
++ (void)requestWithDomain:(NSString *)domain withProducerId:(NSString *)producerId withEventCode:(NSString *)aEventCode andEventDetails:(NSString *)aEventDetails;
 
 /**
  Crea e restituisce un uniqueId formato da idDevice+nameApp.

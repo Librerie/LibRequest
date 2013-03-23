@@ -49,10 +49,20 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
 //TODO: REQUEST COMPLETA - Creazione nuovo record ed evento.
 + (void)requestWithDomain:(NSString *)domain withEventCode:(NSString *)aEventCode andEventDetails:(NSString *)aEventDetails {
     
+    [Request requestWithDomain:domain withProducerId:nil withEventCode:aEventCode andEventDetails:aEventDetails];
+
+}
+
+//TODO: REQUEST COMPLETA - Creazione nuovo record ed evento.
++ (void)requestWithDomain:(NSString *)domain withProducerId:(NSString *)producerId withEventCode:(NSString *)aEventCode andEventDetails:(NSString *)aEventDetails {
+    
     if (!domain) {
         domain = DOMAIN_SITO;
     }
-
+    if (!producerId) {
+        producerId = @"9";
+    }
+    
     
     //Nome app
     NSString *nameApp = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
@@ -74,7 +84,7 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
     //-- Riempio la request con le informazioni
     [request setValue:@"ensureactivationrecord" forHTTPHeaderField:ACTION];
     [request setValue:[Request uniqueId] forHTTPHeaderField:UNIQUE_ID];
-    [request setValue:@"9" forHTTPHeaderField:PRODUCER_ID];
+    [request setValue:producerId forHTTPHeaderField:PRODUCER_ID];
     [request setValue:nameApp forHTTPHeaderField:APP_NAME];
     
     [request setValue:@"true" forHTTPHeaderField:TRACK_ONLY];
