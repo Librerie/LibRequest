@@ -9,6 +9,29 @@
 #import "RequestDelegate.h"
 #import "Request.h"
 
+@interface Request ()
+
+/**
+ @method
+ Crea un evento. (Nascosta all'utente).
+ 
+ @throws
+ * se si vuole utilizzare il domain di default
+ passare nil.
+ * se si vuole utilizzare l'action di default
+ passare nil.
+ * se si vuole utilizzare l'unique id di default
+ passare nil.
+ */
++ (void)requestEventWithDomain:(NSString *)domain
+                    withAction:(NSString *)action
+                  withUniqueId:(NSString *)uniqueId
+                 withEventCode:(NSString *)eventCode
+              withEventDetails:(NSString *)eventDetails;
+
+@end
+
+
 @implementation RequestDelegate
 @synthesize eventCode;
 @synthesize eventDetails;

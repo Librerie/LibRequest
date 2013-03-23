@@ -97,27 +97,6 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
 }
 
 
-
-
-+ (NSString *)uniqueId {
-    
-    NSString *nameApp = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-
-    // -- ID device
-    NSString *idDeviceStr = [NSString alloc];
-    idDeviceStr = [idDeviceStr initWithString:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
-    //NSString *newidDeviceStr = [idDeviceStr substringToIndex:24];
-    //newidDeviceStr = [newidDeviceStr stringByAppendingString:nameApp];
-    idDeviceStr = [idDeviceStr stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    idDeviceStr = [idDeviceStr stringByAppendingString:nameApp];
-    return idDeviceStr;
-}
-
-
-
-
-
-
 /**
     Invia una request di creazione nuovo evento.
  
@@ -170,5 +149,20 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
         
     }
 }
+
++ (NSString *)uniqueId {
+    
+    NSString *nameApp = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+    
+    // -- ID device
+    NSString *idDeviceStr = [NSString alloc];
+    idDeviceStr = [idDeviceStr initWithString:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    //NSString *newidDeviceStr = [idDeviceStr substringToIndex:24];
+    //newidDeviceStr = [newidDeviceStr stringByAppendingString:nameApp];
+    idDeviceStr = [idDeviceStr stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    idDeviceStr = [idDeviceStr stringByAppendingString:nameApp];
+    return idDeviceStr;
+}
+
 
 @end
