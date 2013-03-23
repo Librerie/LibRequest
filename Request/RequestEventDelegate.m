@@ -11,9 +11,7 @@
 @implementation RequestEventDelegate
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    
-    int k = 0;
-    
+        
     NSHTTPURLResponse *urlRestponse = [[NSHTTPURLResponse alloc] init];
     urlRestponse = (NSHTTPURLResponse *)response;
     

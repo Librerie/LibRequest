@@ -21,10 +21,8 @@
 @implementation Request
 
 static NSString * const ACTION_NEW_EVENT = @"event";
-//static NSString * const DOMAIN_SITO = @"http://77.43.32.198:80/da_backend/check.php";
 static NSString * const DOMAIN_SITO = @"http://droidactivator.algos.it/da_backend/check.php";
 static NSString * const ACTION_HEAD_RECORD = @"ensureactivationrecord";
-//static NSString * const ACTION_NEW_EVENT = @"event";
 
 static NSString * const ACTION = @"Action";
 static NSString * const UNIQUE_ID = @"Uniqueid";
@@ -157,8 +155,6 @@ static NSString * const DEVICE_INFO = @"Deviceinfo";
     // -- ID device
     NSString *idDeviceStr = [NSString alloc];
     idDeviceStr = [idDeviceStr initWithString:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
-    //NSString *newidDeviceStr = [idDeviceStr substringToIndex:24];
-    //newidDeviceStr = [newidDeviceStr stringByAppendingString:nameApp];
     idDeviceStr = [idDeviceStr stringByReplacingOccurrencesOfString:@"-" withString:@""];
     idDeviceStr = [idDeviceStr stringByAppendingString:nameApp];
     return idDeviceStr;
